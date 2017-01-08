@@ -4,11 +4,12 @@ title = "在CentOS上用hugo搭建静态blog"
 draft = false
 +++
 
-# 使用源码部署hugo的方法
+# 使用源码部署hugo
 1. 部署golang
 <pre><code>
-  yum install golang
+yum install golang
 </code></pre>
+
 2. 下载hugo源代码
 <pre><code>
   wget https://github.com/spf13/hugo/archive/v0.18.1.tar.gz
@@ -70,7 +71,6 @@ draft = false
     listen       [::]:80;
     server_name  [Your_blog_DNS];
     root /opt/myblogs;
-
     location ^~ / {
         proxy_set_header   X-Real-IP $remote_addr;
         proxy_set_header   Host      $http_host;
