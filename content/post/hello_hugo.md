@@ -2,12 +2,16 @@
 date = "2017-01-06T16:58:20Z"
 title = "在CentOS上用hugo搭建静态blog"
 draft = false
+tags = ["hugo", "nginx"]
+categories = ["Technology"]
+Description = "bushu"
+Content = "content"
 +++
 
 # 使用源码部署hugo
 1. 部署golang
 <pre><code>
-yum install golang
+  $ yum install golang
 </code></pre>
 
 2. 下载hugo源代码
