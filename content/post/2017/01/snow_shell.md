@@ -34,4 +34,4 @@ done
 </code></pre>
 
 最终的运行效果如下：
-[snow](/images/2017/01/snow.gif)
+![snow](/images/2017/01/snow.gif)
