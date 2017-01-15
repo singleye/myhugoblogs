@@ -1,8 +1,8 @@
 +++
 date = "2017-01-15T22:08:38+08:00"
-title = "解析一段让屏幕下雪的shell"
-categories = []
-tags = []
+title = "解析一段让屏幕下雪的shell脚本"
+categories = [Technology, Hacking]
+tags = [shell, script, snow]
 
 +++
 在网上一段shell脚本，运行后可以在屏幕上实现下雪的效果，这段只有一行的代码实在让人佩服。
