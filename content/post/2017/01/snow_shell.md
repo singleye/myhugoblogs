@@ -1,19 +1,21 @@
 +++
 date = "2017-01-15T22:08:38+08:00"
-title = "解析一段让屏幕下雪的shell脚本"
+title = "一段让屏幕下雪的shell脚本"
 categories = ["Technology", "Hacking"]
-tags = ["shell", "script", "snow"]
+tags = ["shell", "script"]
 
 +++
-在网上一段shell脚本，运行后可以在屏幕上实现下雪的效果，这段只有一行的代码实在让人佩服。
+![snow](/images/2017/01/snow.gif)
 
-<pre><code>
+在网上一段[shell](http://jerrygamblin.com/2016/12/21/making-it-snow-in-your-terminal/)脚本，运行后可以在屏幕上实现下雪的效果，这段只有一行的代码实在让人佩服。
+
+{{< highlight shell "linenos=inline,style=manni" >}}
 for((I=0;J=--I;))do clear;for((D=LINES;S=++J**3%COLUMNS,--D;))do printf %*s.\\n $S;done;sleep .1;done
-</code></pre>
+{{< /highlight >}}
 
 
-不过原代码虽然简洁但不太容易一下子看明白工作原理，所以自己按照理解重新写了一遍：
-<pre><code>
+不过原代码虽然简洁但不太容易一下子看明白工作原理，而且只能在命令行上运行无法保存成脚本文件，所以自己按照理解重新写了一遍：
+{{< highlight shell "linenos=inline,style=manni" >}}
 #!/bin/sh
 
 rows=$(tput lines)
@@ -31,7 +33,4 @@ do
     done
     sleep .1
 done
-</code></pre>
-
-最终的运行效果如下：
-![snow](/images/2017/01/snow.gif)
+{{< /highlight >}}
