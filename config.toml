@@ -15,7 +15,7 @@
 baseurl = "http://blogs.singleye.net/"
 appendPort = false
 languageCode = "zh-cn"
-title = "人在江湖飘..."
+title = "人在江湖漂..."
 theme= "hugo-theme-geppaku"
 disqusShortname = "singleye"
 googleAnalytics = "UA-90087618-1"
