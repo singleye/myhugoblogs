@@ -4,7 +4,12 @@ title = "使用nginx搭建hugo静态blog服务"
 tags = ["hugo", "nginx"]
 categories = ["Technology"]
 draft = false
+summary = "之前使用过wordpress搭建过内容管理网站，但是运行环境搭建有些复杂而且页面内容创建需要不够方便，后来关注到静态页面网站框架，发现可以使用markdown进行内容编辑，这对于程序猿来说简直再有好不过了！"
 +++
+之前使用过wordpress搭建过内容管理网站，但是运行环境搭建有些复杂而且页面内容创建需要不够方便，后来关注到静态页面网站框架，发现可以使用markdown进行内容编辑，这对于程序猿来说简直再有好不过了！
+
+简单检索了一下静态内容管理的有很多实现，Ruby的Jekyll，Python的Sphinx doc，Go的Hugo，因为最近在学习Go所以决定搭建一个Hugo来研究下。
+
 
 # 使用源码部署hugo
 ## 部署golang

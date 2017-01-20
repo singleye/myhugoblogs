@@ -4,8 +4,8 @@ date = "2017-01-18T18:56:51+08:00"
 title = "阿里云IPv6支持方案"
 categories = ["Technology"]
 draft = false
+summary = "最近团队开发的APP提交到苹果APP store时被拒了，原因是不支持IPv6的访问。原来苹果App store从2016年6月开始强制新上线APP支持IPv6网络，但由于IPv6基础设施在国内的推广非常缓慢，因此导致了该问题。"
 +++
-
 最近团队开发的APP提交到苹果APP store时被拒了，原因是不支持IPv6的访问。原来苹果App store从2016年6月开始强制新上线APP支持IPv6网络，但由于IPv6基础设施在国内的推广非常缓慢，因此导致了该问题。
 
 
