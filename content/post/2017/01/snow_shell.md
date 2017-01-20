@@ -6,7 +6,7 @@ tags = ["shell", "script"]
 draft = false
 summary = "在网上一段shell脚本，虽然只有一行但运行后可以在屏幕上实现下雪的效果，实在让人佩服，决定好好研究一下。"
 +++
-![snow](/images/2017/01/snow.gif)
+![snow](/media/2017/01/snow.gif)
 
 在网上一段[shell](http://jerrygamblin.com/2016/12/21/making-it-snow-in-your-terminal/ "Jerry Gamblin" target="_blank")脚本，虽然只有一行但运行后可以在屏幕上实现下雪的效果，实在让人佩服，决定好好研究一下。
 
