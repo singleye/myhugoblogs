@@ -1,6 +1,6 @@
 +++
 date = "2017-01-15T22:08:38+08:00"
-title = "一行代码让你的字符终端下起雪来吧！"
+title = "一行代码让你的字符终端下起雪来！"
 categories = ["Technology", "Hacking"]
 tags = ["shell", "script"]
 draft = false
