@@ -60,12 +60,19 @@ IPv6比IPv4的优势：
 
 # IPv6支持方法
 
-## DNS64/NAT64
+## 6in4隧道方式
 
-## tunnel
+1. 创建tunnel
+到![tunnelbroker](https://www.tunnelbroker.net)注册账号，并且创建一个新的常规(Regular) tunnel。创建时候需要在'IPv4 Endpoint'栏填入服务器的公网IPv4地址，并在'Available Tunnel Servers'中选择一个适合自己的服务器区域，过程如下图：
+![创建tunnel](/media/2017/01/create_tunnel.png)
 
-# 阿里云主机支持方案
-## 打开CentOS IPv6限制
+创建完成后的tunnel包含了几个重要的信息：
+* Server IPv4 Address: 这个是tunnel服务端的IPv4地址，创建tunnel的时候需要用到。
+* Server IPv6 Address: 这个是tunnel的服务端IPv6地址。
+* Client IPv4 Address: 这个是tunnel客户端的IPv4地址。
+* Client IPv6 Address: 这个地址需要设置在CentOS服务器的tunnel上面，也是后面DNS服务器需要设置的AAAA记录对应的地址。
+
+2. 解除阿里云主机IPv6限制
 阿里云的CentOS主机默认状态下是把IPv6给禁掉的，可以使用下面的脚本先把系统的IPv6功能打开。
 
 {{< highlight shell "linenos=inline,style=manni" >}}
@@ -73,15 +80,37 @@ IPv6比IPv4的优势：
 
 mkdir ipv6
 mv /etc/modprobe.d/disable_ipv6.conf ipv6/
-cp /etc/sysctl.conf ipv6/
+modprobe ipv6
 
+cp /etc/sysctl.conf ipv6/
 cat /etc/sysctl.conf | sed -e 's/disable_ipv6 = 1/disable_ipv6 = 0/' >
 /etc/.sysctl.conf.bak
 mv -f /etc/.sysctl.conf.bak /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf
 {{< /highlight >}}
 
-## 配置tunnel
+完成上面配置后可以用'ifconfig'检验一下网络接口，如果出现'inet6'类型的信息说明配置已经生效。
+
+3. 配置CentOS服务器端tunnel
+这一步需要用到上面创建tunnel时的'Server IPv4 Address'/'Client IPv4 Address'/'Client IPv6 Address'
+
+{{< highlight shell "linenos=inline,style=manni" >}}
+ip tunnel add he-ipv6 mode sit remote [Server IPv4 Address] local [Client IPv4 Address] ttl 255
+ip link set he-ipv6 up
+ip addr add [Client IPv6 Address]/64 dev he-ipv6
+ip route add ::/0 dev he-ipv6
+ip -f inet6 addr
+{{< /highlight >}}
+
+完成这一步后已经可以对'[Client IPv6 Address]'进行访问了，可以通过'ping6'或者'curl'进行验证。
+
+{{< highlight shell "linenos=inline,style=manni" >}}
+# ping6 [Client IPv6 Address]
+# curl --globoff -6 [Client IPv6 Address]
+{{< /highlight >}}
+
+4. 设置DNS AAAA记录
+大家熟悉的A记录是DNS中IPv4的对应地址，相应的IPv6地址叫AAAA记录。设置成功后就可以直接用DNS进行访问了。
 
 
 # 附录
@@ -96,3 +125,4 @@ sysctl -p /etc/sysctl.conf
 # 参考资料
 * https://zh.wikipedia.org/wiki/IPv6
 * http://baike.baidu.com/item/IPv6
+* http://test-ipv6.com/faq_6to4.html
