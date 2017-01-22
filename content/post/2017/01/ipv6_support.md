@@ -64,13 +64,14 @@ IPv6比IPv4的优势：
 
 1. 创建tunnel
 到![tunnelbroker](https://www.tunnelbroker.net)注册账号，并且创建一个新的常规(Regular) tunnel。创建时候需要在'IPv4 Endpoint'栏填入服务器的公网IPv4地址，并在'Available Tunnel Servers'中选择一个适合自己的服务器区域，过程如下图：
-![创建tunnel](/media/2017/01/create_tunnel.png)
+![创建tunnel](/media/2017/01/create_tunnel.jpg)
 
 创建完成后的tunnel包含了几个重要的信息：
 * Server IPv4 Address: 这个是tunnel服务端的IPv4地址，创建tunnel的时候需要用到。
 * Server IPv6 Address: 这个是tunnel的服务端IPv6地址。
 * Client IPv4 Address: 这个是tunnel客户端的IPv4地址。
 * Client IPv6 Address: 这个地址需要设置在CentOS服务器的tunnel上面，也是后面DNS服务器需要设置的AAAA记录对应的地址。
+![tunnel详情](/media/2017/01/tunnel_detail.jpg)
 
 2. 解除阿里云主机IPv6限制
 阿里云的CentOS主机默认状态下是把IPv6给禁掉的，可以使用下面的脚本先把系统的IPv6功能打开。
