@@ -69,8 +69,8 @@ broker的服务器端，broker将数据包进行IPv4的封装通过隧道发送�
 
 下面我们以6in4的方式对阿里云ECS服务器上使用EIP的服务进行IPv6改造。
 
-1. 创建tunnel
-到![tunnelbroker](https://www.tunnelbroker.net)注册账号，并且创建一个新的常规(Regular) tunnel。创建时候需要在'IPv4 Endpoint'栏填入服务器的公网IPv4地址，并在'Available Tunnel Servers'中选择一个适合自己的服务器区域，过程如下图：
+### 1. 创建tunnel
+到[tunnelbroker](https://www.tunnelbroker.net)注册账号，并且创建一个新的常规(Regular) tunnel。创建时候需要在'IPv4 Endpoint'栏填入服务器的公网IPv4地址，并在'Available Tunnel Servers'中选择一个适合自己的服务器区域，过程如下图：
 ![创建tunnel](/media/2017/01/create_tunnel.jpg)
 
 创建完成后的tunnel包含了几个重要的信息：
@@ -80,7 +80,7 @@ broker的服务器端，broker将数据包进行IPv4的封装通过隧道发送�
 * Client IPv6 Address: 这个地址需要设置在CentOS服务器的tunnel上面，也是后面DNS服务器需要设置的AAAA记录对应的地址。
 ![tunnel详情](/media/2017/01/tunnel_detail.jpg)
 
-2. 解除阿里云主机IPv6限制
+### 2. 解除阿里云主机IPv6限制
 阿里云的CentOS主机默认状态下是把IPv6给禁掉的，可以使用下面的脚本先把系统的IPv6功能打开。
 
 {{< highlight shell "linenos=inline,style=manni" >}}
@@ -99,7 +99,7 @@ sysctl -p /etc/sysctl.conf
 
 完成上面配置后可以用'ifconfig'检验一下网络接口，如果出现'inet6'类型的信息说明配置已经生效。
 
-3. 配置CentOS服务器端tunnel
+### 3. 配置CentOS服务器端tunnel
 这里顺带介绍一下Linux支持的几种隧道：
 * IP隧道：通过将IPv4数据包封装进另一个IPv4数据包中进行发送，实现两个互不连通的IP网络之间的连接。但是不能通过隧道进行广播或者IPv6数据包的发送。
 * SIT隧道：将IPv6数据包封装进IPv4数据包中，对应6in4的场景。
@@ -122,7 +122,7 @@ ip -f inet6 addr
 # curl --globoff -6 [Client IPv6 Address]
 {{< /highlight >}}
 
-4. 设置DNS AAAA记录
+### 4. 设置DNS AAAA记录
 大家熟悉的A记录是DNS中IPv4的对应地址，相应的IPv6地址叫AAAA记录。设置成功后就可以直接用DNS进行访问了。
 
 {{< highlight shell "linenos=inline,style=manni" >}}
