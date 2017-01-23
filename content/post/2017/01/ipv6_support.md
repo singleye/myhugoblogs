@@ -1,10 +1,11 @@
 +++
 tags = ["IPv6", "Network", "阿里云"]
 date = "2017-01-18T18:56:51+08:00"
-title = "阿里云IPv6支持方案"
+title = "阿里云ECS EIP服务进行IPv6改造的方法"
 categories = ["Technology"]
 draft = false
 summary = "最近团队开发的APP提交到苹果APP store时被拒了，原因是不支持IPv6的访问。原来苹果App store从2016年6月开始强制新上线APP支持IPv6网络，但由于IPv6基础设施在国内的推广非常缓慢，因此导致了该问题。"
+keywords = ["IPv6", "阿里云", "ECS", "EIP", "tunnel", "6in4"]
 +++
 最近团队开发的APP提交到苹果APP store时被拒了，原因是不支持IPv6的访问。原来苹果App store从2016年6月开始强制新上线APP支持IPv6网络，但由于IPv6基础设施在国内的推广非常缓慢，因此导致了该问题。
 
@@ -58,9 +59,15 @@ IPv6比IPv4的优势：
 8. 新的选项。IPV6有一些新的选项来实现附加的功能[14]  。
 
 
-# IPv6支持方法
+# 阿里ECS EIP 服务IPv6支持方法
 
 ## 6in4隧道方式
+6in4的方法是将IPv6的数据包包裹在IPv4的数据包中在IPv4的网络上传输，并通过IPv4/IPv6的网络交界处部署的tunnel broker进行疯转转发，基本工作原理如下：
+* IPv6网络上的客户端对服务进行访问时发送IPv6数据包，数据包到达tunnel
+broker的服务器端，broker将数据包进行IPv4的封装通过隧道发送到你的IPv4服务器端，在隧道的另一端进行IPv6数据包的应用层处理。
+* 你的服务器收到数据包进行应用层处理后将相应数据包进行IPv6封装，再通过隧道包裹成IPv4的数据报文进行隧道传输，当数据包抵达IPv4/IPv6的网络交界处的tunnel broker时，tunnel broker将IPv6的包解析出来在IPv6的网络上进行传递到达IPv6的客户端。
+
+下面我们以6in4的方式对阿里云ECS服务器上使用EIP的服务进行IPv6改造。
 
 1. 创建tunnel
 到![tunnelbroker](https://www.tunnelbroker.net)注册账号，并且创建一个新的常规(Regular) tunnel。创建时候需要在'IPv4 Endpoint'栏填入服务器的公网IPv4地址，并在'Available Tunnel Servers'中选择一个适合自己的服务器区域，过程如下图：
@@ -93,7 +100,12 @@ sysctl -p /etc/sysctl.conf
 完成上面配置后可以用'ifconfig'检验一下网络接口，如果出现'inet6'类型的信息说明配置已经生效。
 
 3. 配置CentOS服务器端tunnel
-这一步需要用到上面创建tunnel时的'Server IPv4 Address'/'Client IPv4 Address'/'Client IPv6 Address'
+这里顺带介绍一下Linux支持的几种隧道：
+* IP隧道：通过将IPv4数据包封装进另一个IPv4数据包中进行发送，实现两个互不连通的IP网络之间的连接。但是不能通过隧道进行广播或者IPv6数据包的发送。
+* SIT隧道：将IPv6数据包封装进IPv4数据包中，对应6in4的场景。
+* GRE隧道：最初是由cisco开发的隧道协议，能够进行多播及IPv6数据包的发送。
+
+这次主要介绍"SIT"隧道的方案。现在需要用到上面创建tunnel时的'Server IPv4 Address'/'Client IPv4 Address'/'Client IPv6 Address'，在你的ECS主机上面运行下面的命令：
 
 {{< highlight shell "linenos=inline,style=manni" >}}
 ip tunnel add he-ipv6 mode sit remote [Server IPv4 Address] local [Client IPv4 Address] ttl 255
@@ -112,6 +124,11 @@ ip -f inet6 addr
 
 4. 设置DNS AAAA记录
 大家熟悉的A记录是DNS中IPv4的对应地址，相应的IPv6地址叫AAAA记录。设置成功后就可以直接用DNS进行访问了。
+
+{{< highlight shell "linenos=inline,style=manni" >}}
+# ping6 [Client IPv6 DNS name]
+# curl --globoff -6 [Client IPv6 DNS name]
+{{< /highlight >}}
 
 
 # 附录
