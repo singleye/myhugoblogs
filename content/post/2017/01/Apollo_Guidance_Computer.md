@@ -69,7 +69,7 @@ index faf4c5e..e779b0b 100644
         ../../virtualagc/yaYUL/yaYUL --block1 $^ >test.agc.lst
 {{< /highlight >}}
 
-## 3. 编译
+编译
 {{< highlight shell "linenos=inline,style=manni" >}}
 $ make
 $ make install
@@ -77,13 +77,15 @@ $ make install
 完成后会在用户目录下出现"VirtualAGC"目录，可运行程序都被安装到这个目录下。
 
 
-## 4. 飞向月球吧
+## 3. 飞向月球吧
 运行bin目录下的VirtualAGC即可运行起来。
 {{< highlight shell "linenos=inline,style=manni" >}}
+$ ./bin/VirtualAGC
 {{< /highlight >}}
 ![VirtualAGC](http://imglf2.nosdn.127.net/img/NGpJbGd3MUdOUDN1eHVZY2NuYjJrM1dQVjlHOWwyRk1wQ3k0eTVocm9zY0VCNDIvMThmbWFRPT0.gif)
 
 列几个CM的命令：
+
 | 命令 | 功能 |
 | ---- | ---- |
 | V05N09E | 查看报警代码 |
@@ -99,6 +101,7 @@ $ make install
 完整的命令列表可以在Github上的代码中[ASSEMBLY_AND_OPERATION_INFORMATION.s](https://github.com/virtualagc/virtualagc/blob/master/Colossus249/ASSEMBLY_AND_OPERATION_INFORMATION.agc)看到。
 
 几个LM的命令：
+
 | 命令 | 功能 |
 | ---- | ---- |
 | V35E | DSKY灯管测试 |
