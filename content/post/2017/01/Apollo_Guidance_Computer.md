@@ -9,6 +9,8 @@ tags = ["Apollo", "AGC", "Lunar"]
 
 ![土星号](http://www.ibiblio.org/apollo/Saturn1B-transparent.png)
 
+PS： 上个周末还在听王冠红人馆调侃河南空气质量监督特别小组的禁放政策出台3天后就撤销的节目，心想今年过年回家乡鞭炮还可以照常放，没想到还真的全面禁放了。没办法放鞭炮咱就“发射个火箭”玩玩吧:-)
+
 前两天在Github上看到一个有趣的项目，是当年美国登月计划[“阿波罗号”](https://github.com/virtualagc/virtualagc)的导航计算机的源代码，并且[Virtual AGC](http://www.ibiblio.org/apollo/) [MIT museum](http://mitmuseum.mit.edu)还开发了运行用的模拟器，使用这个模拟器能够运行导航计算机中的“指令模块”和“登月模块”。
 
 估计很多人看过下面的张照片。没错，那等身的汇编代码现在可以在这个项目里面看到了！
