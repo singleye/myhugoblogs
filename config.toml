@@ -12,7 +12,7 @@
 # For developpers, if you modify this theme, put your images in `source/images` folder and
 # use grunt task `build` to synchronize assets
 
-baseurl = "http://blogs.singleye.net/"
+baseurl = "http://www.singleye.net/"
 appendPort = false
 languageCode = "zh-cn"
 title = "人在江湖漂..."
@@ -116,7 +116,7 @@ defaultContentLanguage = "zh-cn"
   # If false it will flat categories.
   hierarchicalCategories = true
 
-  description = "blogs.singleye.net"
+  description = "www.singleye.net"
 
   # Customization
   # Define the behavior of the sidebar
